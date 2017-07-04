@@ -28,19 +28,22 @@ class BooksApp extends React.Component {
     }
 
   render() {
+    const {books} = this.state
+    
     return (
       <div className="app">
         <Route path='/search' render={ () => (
           <Search 
             searchBook={this.searchBook} 
             selectBook={this.selectBook} 
+            currentBooks={books}
           />
         )} />
         <Route exact path='/' render={ () => (
           <BookList 
             header='MyReads'
             selectBook={this.selectBook}
-            books={this.state.books} 
+            books={books} 
           />
         )} />
       </div>

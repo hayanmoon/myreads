@@ -3,11 +3,7 @@ import propType from 'prop-types'
 
 class Book extends Component{
     state = {
-        shelf: ''
-    }
-
-    componentDidMount(){
-        this.setState({shelf: this.props.book.shelf})
+        shelf: this.props.book.shelf
     }
 
     changeShelf = (shelf) => {

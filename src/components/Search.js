@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import debounce from 'debounce'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 
 class Search extends Component{
@@ -22,7 +23,12 @@ class Search extends Component{
                 if(books && books.error){
                     this.setState({books:[]})                    
                 }else{
-                    this.setState({books})
+                    //update search results to use book in shelf value
+                    const updatedResults = books.map((bookResult) => {
+                        const match =  this.props.currentBooks.find((x)=>  x.id === bookResult.id )
+                        return match ? match : bookResult
+                    })
+                    this.setState({books:updatedResults})
                 }
             })
         }
@@ -49,6 +55,12 @@ class Search extends Component{
           </div>
         )
     }
+}
+
+Search.propTypes = {
+    searchBook: PropTypes.func.isRequired,
+    selectBook: PropTypes.func.isRequired,
+    currentBooks: PropTypes.array.isRequired
 }
 
 export default Search
